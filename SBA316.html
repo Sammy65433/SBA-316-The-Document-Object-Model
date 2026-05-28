@@ -1,36 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-<head>
+  <head>
     <title>Form Validation Practice</title>
     <link rel="stylesheet" href="" />
     <!-- Font Awesome for Icons -->
-    <script src="https://kit.fontawesome.com/d8f052c6cf.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/d8f052c6cf.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="./SBA316.js" defer></script>
-</head>
+  </head>
 
-<body>
-   <h1> NBA Score-Keeper </h1>
-   <!-- FORM: game settings -->
-   <form id="setup-form"> 
+  <body>
+    <h1>NBA Team Guess Game</h1>
 
-    <!-- Team selector -->
-     <label>Team:
-        <select id="team-select">
-            <option value="lakers">Lakers</option>
-            <option value="celtics">Celtics</option>
-            <option value="bulls">Bulls</option>
-        </select>
+    <!-- Container / like the staduim -->
 
+    <p id="clue"></p>
 
-     </label>
+    <!-- FORM: game settings -->
 
-     <!-- Target Score - HTML validation -->
-     <label> Target score:
+    <form id="guess-form">
+      <!-- Text input -->
+      <input
+        id="team-input"
+        type="text"
+        placeholder="Enter NBA team"
+        required
+        minlength="3"
+      />
 
-     </label>
-
-   </form>
-</body>
-
+      <!-- Submit Button - Submit event listener-->
+      <button type="submit">Submit Guess</button>
+    </form>
+  </body>
 </html>
