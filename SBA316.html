@@ -1,17 +1,15 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Form Validation Practice</title>
-    <link rel="stylesheet" href="" />
-    <!-- Font Awesome for Icons -->
-    <script
-      src="https://kit.fontawesome.com/d8f052c6cf.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="./SBA316.js" defer></script>
-  </head>
 
-  <body>
+<head>
+    <title>Form Validation Practice</title>
+    <link rel="stylesheet" href="./SBA316.css" />
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/d8f052c6cf.js" crossorigin="anonymous"></script>
+    <script src="./SBA316.js" defer></script>
+</head>
+
+<body>
     <h1>NBA Team Guess Game</h1>
 
     <!-- Container / like the staduim -->
@@ -21,17 +19,23 @@
     <!-- FORM: game settings -->
 
     <form id="guess-form">
-      <!-- Text input -->
-      <input
-        id="team-input"
-        type="text"
-        placeholder="Enter NBA team"
-        required
-        minlength="3"
-      />
+        <!-- Text input -->
+        <input id="team-input" type="text" placeholder="Enter NBA team" required minlength="3" />
 
-      <!-- Submit Button - Submit event listener-->
-      <button type="submit">Submit Guess</button>
+        <!-- Submit Button - Submit event listener-->
+        <button type="submit">Submit Guess</button>
     </form>
-  </body>
+    <!-- Feedback Paragraph -->
+    <p id="feedback"></p>
+
+    <!-- Score display - update after each guess -->
+    <p id="score">Score: 0</p>
+
+    <!-- reset button - click listener -->
+    <button id="reset-btn">Reset Game</button>
+
+    <!-- History list - added with createElement /append -->
+    <ul id="history"></ul>
+</body>
+
 </html>
