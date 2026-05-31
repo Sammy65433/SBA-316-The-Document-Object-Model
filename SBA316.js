@@ -14,19 +14,27 @@
 // Game Data
 // Put teams in array list - obj has 2props clue/answer
 
-const teams = [
-  {
-    clue: "This team plays in Los Angeles and wears purple and gold.",
-    answer: "lakers",
-  },
-  {
-    clue: "This team plays in Boston and wears green.",
-    answer: "celtics",
-  },
-  {
-    clue: "This team plays in Chicago and is named after an animal.",
-    answer: "bulls",
-  },
+const teams = [{
+        clue: "Founded in 1947, this franchise won its first championship in 1972.",
+        answer: "lakers",
+    },
+    {
+        clue: "This team has the most NBA championships.",
+        answer: "celtics",
+    },
+    {
+        clue: "This team dominated the 1990s, led by a player nicknamed “His Airness” who wore number 23.",
+        answer: "bulls"
+    },
+    {
+        clue: "This team set single-season record with 73 wins in 2016",
+        answer: "warriors",
+    },
+    {
+        clue: "This team won back-to-back titles in 2012-13",
+        answer: "Heat",
+    },
+
 ];
 
 // console.log(teams);
@@ -64,12 +72,12 @@ const historyEl = document.getElementById("history");
 // render 1st clue
 // Pull clue str from team
 function renderClue() {
-//   console.log("renderClue called - index:", currentIndex);
-//   console.log("clue text:", teams[currentIndex].clue);
+    //   console.log("renderClue called - index:", currentIndex);
+    //   console.log("clue text:", teams[currentIndex].clue);
 
-  // writing text in element <p id="clue"
-//   without this text player has no prompt, - Meaningless
-  clueEl.textContent = teams[currentIndex].clue;
+    // writing text in element <p id="clue"
+    //   without this text player has no prompt, - Meaningless
+    clueEl.textContent = teams[currentIndex].clue;
 }
 renderClue();
 
@@ -87,27 +95,55 @@ resetBtn.addEventListener('click', resetGame);
 
 // Handle Guess
 function handleGuess(e) {
+    // console.assert.log('event ->', e.type);
+
     e.preventDefault();
 
+
+    // console.log('raw input →', inputEl.value);
     // grab the data, clean and normalise 
     const userGuess = inputEl.value.trim().toLowerCase();
+    // console.log(userGuess)
+    // console.log('clean guess →', `"${userGuess}"`);
+
+
 
     // make sure they enter something 
     // empty after the trim
     if (userGuess === '') {
+
+        // console.log('empty guess – feedback shown');
         feedbackEl.textContent = 'Please enter a team name.'; //message 
         feedbackEl.className = ''; //clear class 
+        // console.log(userGuess)
+
         return; //exit 
     }
+    // console.log('checking answer for →', userGuess);
     checkAnswer(userGuess);
 }
 
 // Check the Answer 
 // i need to check to make sure the answers are correct 
+function checkAnswer(userGuess) {
 
+    // get correct for clue 
+    const correct = teams[currentIndex].answer;
+    // console.log(' correct answer ->', correct);
 
-if (userGuess === correct) {
-    score++;
+    // compare userguess vs correct 
+    if (userGuess === correct) {
+
+        score++; // increase score
+        // console.log('guess correct -> score =', score);
+        feedbackEl.textContent = 'Correct'; //player sees message correct
+        feedbackEl.className = 'correct';
+    } else {
+        console.log('guess wrong -> user:', userGuess, '| correct:', correct);
+
+        feedbackEl.textContent = `Wrong. Answer: ${correct}`; //player sees message wrong
+        feedbackEl.className = 'wrong';
+    }
+
+    // working so far !!!!!!!!!!!
 }
-// if more clues remain -> increment currentIndex -> renderClue() again 
-// if no clues left -> endgame 
