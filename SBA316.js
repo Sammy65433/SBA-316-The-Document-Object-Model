@@ -76,7 +76,7 @@ function renderClue() {
     //   console.log("clue text:", teams[currentIndex].clue);
 
     // writing text in element <p id="clue"
-    //   without this text player has no prompt, - Meaningless
+    //   without this text, player has no prompt, - Meaningless
     clueEl.textContent = teams[currentIndex].clue;
 }
 renderClue();
@@ -103,7 +103,7 @@ function handleGuess(e) {
     // console.log('raw input →', inputEl.value);
     // grab the data, clean and normalise 
     const userGuess = inputEl.value.trim().toLowerCase();
-    // console.log(userGuess)
+  
     // console.log('clean guess →', `"${userGuess}"`);
 
 
@@ -135,7 +135,7 @@ function checkAnswer(userGuess) {
     if (userGuess === correct) {
 
         score++; // increase score
-        // console.log('guess correct -> score =', score);
+        console.log('guess correct -> score =', score);
         feedbackEl.textContent = 'Correct'; //player sees message correct
         feedbackEl.className = 'correct';
     } else {
@@ -146,4 +146,39 @@ function checkAnswer(userGuess) {
     }
 
     // working so far !!!!!!!!!!!
+}
+// Update the score board 
+    scoreEl.textContent = `Score: ${score}`;
+    console.log('scoreboard updated ->', scoreEl.textContent);
+
+    // Record this round - gotta make a function for the history 
+    addHistory(userGuess, correct);
+
+    // go to next round 
+    currentIndex++;
+    console.log('next index →', currentIndex);
+    // if more clues remain -> increment currentIndex -> renderClue() again 
+    // if no clues left -> endgame 
+
+    // if more clues left show the next clue and clear the field 
+    if (currentIndex < teams.length) {
+        console.log('render next clue');
+
+        renderClue();
+        inputEl.value = '';
+    } else {
+        console.log('no more clues – end game');
+    
+    }
+    // History Function - creating a new list item and append it 
+// see every attempt
+// build a node n insert append 
+// keep data seperate 
+    function addHistory(guess, answer) {
+    console.log('add to history -> guess:', guess, '| answer:', answer)
+
+    const li = document.createElement('li'); //make <li>
+    li.textContent = `You guessed "${guess}", answer was "${answer}"`; //fill text
+    historyEl.appendChild(li); // add to id="history"
+
 }

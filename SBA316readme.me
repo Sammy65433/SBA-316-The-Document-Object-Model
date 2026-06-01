@@ -1,13 +1,30 @@
-SBA 316: 
-The Document Object Model
+# NBA Team Guess Game
+*Single‑page web app for SBA 316 – The Document Object Model*
 
-Guess the NBA team
+---
 
-## What This Project Does
- 
-NBA Team Guess Game
-// This is a single‑page web app that tests the player’s NBA knowledge.
-// The app presents a textual clue (e.g., “This team plays in Los Angeles and wears purple and gold.”). 
-// The player types the team name into a form field and submits it.
+## Project Overview
+A simple “guess the NBA team” game that runs entirely in the browser.
 
-1st step 
+- Shows a textual clue about an NBA franchise.  
+- Player types the team name and submits the guess.  
+- Immediate feedback, score update, round history, and automatic move to the next clue.  
+- 5 rounds total (one clue per round).
+
+---
+
+## What’s Implemented
+
+| Feature | Details |
+|---------|---------|
+| **HTML skeleton** | Elements with IDs: `clue`, `guess-form`, `team-input`, `feedback`, `score`, `reset-btn`, `history`. |
+| **Game data** | `teams` array of objects `{ clue, answer }`. |
+| **State** | `score = 0`, `currentIndex = 0`. |
+| **DOM refs** | Cached via `document.getElementById`. |
+| **Render clue** | `renderClue()` writes the current clue into `#clue`. |
+| **Form handling** | `formEl.addEventListener('submit', handleGuess)`. |
+| **Answer checking** | `checkAnswer()` compares guess, updates score, shows feedback (`.correct` / `.wrong`). |
+| **Scoreboard** | Updated with `scoreEl.textContent = \`Score: ${score}\``. |
+| **History log** | `addHistory()` creates an `<li>` describing each round. |
+| **Round progression** | Increments `currentIndex`, renders next clue or ends game. |
+| **Reset button** | Listener attached (`resetBtn.addEventListener('click', resetGame)`) – function still to be written. |
