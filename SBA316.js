@@ -77,6 +77,8 @@ function renderClue() {
 
     // writing text in element <p id="clue"
     //   without this text, player has no prompt, - Meaningless
+
+    
     clueEl.textContent = teams[currentIndex].clue;
 }
 renderClue();
@@ -103,7 +105,7 @@ function handleGuess(e) {
     // console.log('raw input →', inputEl.value);
     // grab the data, clean and normalise 
     const userGuess = inputEl.value.trim().toLowerCase();
-  
+
     // console.log('clean guess →', `"${userGuess}"`);
 
 
@@ -148,37 +150,59 @@ function checkAnswer(userGuess) {
     // working so far !!!!!!!!!!!
 }
 // Update the score board 
-    scoreEl.textContent = `Score: ${score}`;
-    console.log('scoreboard updated ->', scoreEl.textContent);
+scoreEl.textContent = `Score: ${score}`;
+console.log('scoreboard updated ->', scoreEl.textContent);
 
-    // Record this round - gotta make a function for the history 
-    addHistory(userGuess, correct);
+// Record this round - gotta make a function for the history 
+addHistory(userGuess, correct);
 
-    // go to next round 
-    currentIndex++;
-    console.log('next index →', currentIndex);
-    // if more clues remain -> increment currentIndex -> renderClue() again 
-    // if no clues left -> endgame 
+// go to next round 
+currentIndex++;
+console.log('next index →', currentIndex);
+// if more clues remain -> increment currentIndex -> renderClue() again 
+// if no clues left -> endgame 
 
-    // if more clues left show the next clue and clear the field 
-    if (currentIndex < teams.length) {
-        console.log('render next clue');
+// if more clues left show the next clue and clear the field 
+if (currentIndex < teams.length) {
+    console.log('render next clue');
 
-        renderClue();
-        inputEl.value = '';
-    } else {
-        console.log('no more clues – end game');
-    
-    }
-    // History Function - creating a new list item and append it 
+    renderClue();
+    inputEl.value = '';
+} else {
+    console.log('no more clues – end game');
+    endGame();
+}
+// History Function - creating a new list item and append it 
 // see every attempt
 // build a node n insert append 
 // keep data seperate 
-    function addHistory(guess, answer) {
+function addHistory(guess, answer) {
     console.log('add to history -> guess:', guess, '| answer:', answer)
 
     const li = document.createElement('li'); //make <li>
     li.textContent = `You guessed "${guess}", answer was "${answer}"`; //fill text
     historyEl.appendChild(li); // add to id="history"
+
+}
+// END GAME FUNCTION
+function endGame() {
+
+    clueEl.textContent = 'Game Over!'; //Replace clue with message 
+
+    // finally score 
+    // how many guesses were right vs how many clues was presented 
+    // if score is 2 and teams.length is 3 final score: 2/3
+    //  i should see "Final Score: 2/3"
+    const finalMsg = `Final score: ${score} / ${teams.length}`;
+    feedbackEl.textContent = finalMsg
+    feedbackEl.className = 'correct';
+console.log('Congrats', finalMsg)
+    
+// BOM method - pop up 
+    alert('Nice job finishing the NBA game!');
+}
+
+// Gotta reset the game 
+function resetgame() {
 
 }
